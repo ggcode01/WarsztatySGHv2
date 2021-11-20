@@ -9,16 +9,19 @@ public class StudentService {
     private final UUIDStudentIdGenerator studentIdGenerator;
     private final StatusService statusService;
     private final ApplicationFormService applicationFormService;
+    private final FileSaver fileSaver;
 
     @Autowired
-    public StudentService (UUIDStudentIdGenerator studentIdGenerator, StatusService statusService, ApplicationFormService applicationFormService) {
+    public StudentService (UUIDStudentIdGenerator studentIdGenerator, StatusService statusService, ApplicationFormService applicationFormService, FileSaver fileSaver) {
         this.studentIdGenerator = studentIdGenerator;
         this.statusService = statusService;
         this.applicationFormService = applicationFormService;
+        this.fileSaver = fileSaver;
     }
 
     public void printStudent() {
         Student student = create(applicationFormService.createMock());
+        fileSaver.saveToFile(student);
         System.out.println(student);
     }
 
