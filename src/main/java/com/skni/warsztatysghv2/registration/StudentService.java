@@ -1,10 +1,21 @@
 package com.skni.warsztatysghv2.registration;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class StudentService {
 
-    private final UUIDStudentIdGenerator studentIdGenerator = new UUIDStudentIdGenerator();
-    private final StatusService statusService = new StatusService();
-    private final ApplicationFormService applicationFormService = new ApplicationFormService();
+    private final UUIDStudentIdGenerator studentIdGenerator;
+    private final StatusService statusService;
+    private final ApplicationFormService applicationFormService;
+
+    @Autowired
+    public StudentService (UUIDStudentIdGenerator studentIdGenerator, StatusService statusService, ApplicationFormService applicationFormService) {
+        this.studentIdGenerator = studentIdGenerator;
+        this.statusService = statusService;
+        this.applicationFormService = applicationFormService;
+    }
 
     public void printStudent() {
         Student student = create(applicationFormService.createMock());
